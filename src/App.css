@@ -40,3 +40,213 @@
 .read-the-docs {
   color: #888;
 }
+* {
+  font-family: 'Poppins';
+  font-weight: 400;
+  margin: 0;
+}
+:root {
+  width: 100%;
+}
+
+.navbar {
+    border-bottom: 1px black solid;
+    margin: 0;
+    color: #03045E;
+}
+.navDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.navLogoDiv {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.navTitle {
+    font-weight: 600;
+}
+.navLinks {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin: 0 30px;
+  font-size: 8px;
+}
+.navImg {
+  width: 50px;
+  height: auto;
+}
+.navLinks div {
+  margin: 0 10px;
+}
+#frontImgDiv {
+  width: 270px;
+  height: 250px;
+  overflow: hidden;
+  padding-top: 5px;
+}
+#frontImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 15px;
+}
+#mainBody {
+  margin: 50px 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  display: none;
+}
+#frontText {
+  width: 40%;
+  color: #03045E;
+}
+#frontText h1 {
+  font-weight: 600;
+  font-size: 24px;
+}
+#frontButtons img {
+  filter: brightness(0) invert(1);
+  width: 8px;
+}
+#frontButtons button {
+  font-size: 8px;
+  border-radius: 15px;
+  padding: 7px 12px;
+}
+#getStarted {
+    color: white;
+  background-color: #0077B6;
+  border: none;
+    font-weight: 600;
+}
+#contactMe {
+  background-color: white;
+  color: #0077B6;
+  border: #0077B6 solid 0.5px;
+  font-weight: 400;
+}
+
+#frontSub {
+  font-size: 8px;
+  margin-bottom: 10px;
+  color: rgba(3, 4, 94, 60%);
+}
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-top: solid 1px black;
+}
+.credits {
+  margin: 5px 40px;
+  font-size: 10px;
+}
+.credits h4 {
+  color: rgba(3, 4, 94, 60%);
+}
+.socials {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-right: 40px;
+}
+.socials button {
+  width: 20px;
+  height: 20px;
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 3px;
+  margin: 5px;
+}
+.socials img {
+  width: auto;
+  height: 10px;
+}
+
+#profileTitle h2 {
+  font-weight: 600;
+}
+#searchBar {
+  background-color: white;
+  color: #0077B6;
+  border: #0077B6 solid 0.5px;
+  font-weight: 400;
+  font-size: 10px;
+  border-radius: 15px;
+  padding: 7px 12px;
+  display: flex;
+  align-items: center;
+  padding-right: 40%;
+}
+#searchBar img {
+  width: 10px;
+  margin: 3px 5px;
+}
+.profBlock {
+  width: 25%;
+  background-color: #CAF0F8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+  padding: 20px 10px;
+   border-radius: 10px;
+}
+.profImg img {
+  width: 95%;
+  margin: 2.5%;
+  padding: 10px 0;
+}
+.profName {
+  width: 95%;
+  text-align: left;
+
+}
+.profName h5 {
+    font-weight: 600;
+}
+.profInfo {
+    width: 95%;
+  text-align: left;
+}
+#profileTiles {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+
+  justify-content: center;
+}
+#profilePage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#profileSearch {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+#searchBar input {
+  border: none;
+  color: #0077B6;
+}
+#searchBar input::placeholder {
+  color: #0077B6;
+}
+.discover:hover {
+  cursor: pointer;
+}
+.home:hover {
+  cursor: pointer;
+}
