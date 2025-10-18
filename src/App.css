@@ -249,3 +249,6 @@
 .home:hover {
   cursor: pointer;
 }
+NavLink {
+  color: #030453;
+}

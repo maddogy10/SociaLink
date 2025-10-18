@@ -1,17 +1,10 @@
-//import { useState } from 'react'
-//import reactLogo from './assets/react.svg'
-//import viteLogo from '/vite.svg'
-import './App.css'
-import Footer from './components/Footer'
-import NavBar from './components/NavBar'
-import ProfileCard from './components/ProfileCard'
-
-function App() {
-  //const [count, setCount] = useState(0)
-
+import React from 'react'
+import NavBar from '../components/NavBar'
+import ProfileCard from '../components/ProfileCard'
+import Footer from '../components/Footer'
+const Discover = () => {
   return (
     <>
-      <NavBar />
       <div id="profilePage">
         <div id="profileTitle">
        <h2>Discover</h2>
@@ -31,8 +24,8 @@ function App() {
       </div>
       </div>
       <Footer/>
-    </>
+      </>
   )
 }
 
-export default App
+export default Discover
