@@ -18,9 +18,12 @@ function App() {
       <NavBar />
       <Routes>
       <Route path="/" element={<Home/>}></Route>
-      <Route path="/discover" element={<Discover/>} />
+      <Route path="/discover" element={<Discover/>} >
+        <Route path="/discover/:id" element={<ProfileCard/>}/>
+        </Route>
       <Route path="/about" element={<About/>}></Route>
-      <Route path="/profile" element={<Profile/>}></Route>
+      <Route path="/profile" element={<Profile/>}>
+      </Route>
 
       </Routes>
     </BrowserRouter>
