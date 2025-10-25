@@ -8,7 +8,7 @@ const Discover = () => {
   useEffect(() => {
   const fetchProfiles = async() => {
     try {
-      const res = await fetch('https://disc-assignment-5-users-api-iyct.onrender.com/api/users/');
+      const res = await fetch('http://localhost:3002/api/users');
       const data = await res.json();
       setProfiles(data);
     } catch (e) {
@@ -30,7 +30,7 @@ const Discover = () => {
       {profiles.map((profile) => (
       <div className="profBlock" key={profile.id}>
        
-        <ProfileCard name={profile.firstName} age={profile.graduationYear} major={profile.major} image={profile.profilePicture} id={profile.id}/>
+        <ProfileCard name={profile.first_name + " " + profile.last_name} age={profile.grad_year} major={profile.major} image={profile.img_url} id={profile.id}/>
         </div>
        ))};
        </div>
