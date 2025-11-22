@@ -64,3 +64,11 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/* Ensure the React root fills the viewport when body is a flex container
+   (body is currently set to display:flex above). This prevents the
+   root node from shrinking to its content width and makes pages span
+   the full page width. */
+#root {
+  width: 100%;
+}

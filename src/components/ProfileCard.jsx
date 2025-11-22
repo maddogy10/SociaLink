@@ -1,6 +1,6 @@
 //import React, {useEffect, useState } from 'react'
 //import { useParams } from "react-router-dom";
-const ProfileCard = ({name, age, major, image}) => {
+const ProfileCard = ({name, age, major, image, id}) => {
    // const givenMajor = {major};
    //#0077B6
 
@@ -37,6 +37,7 @@ const ProfileCard = ({name, age, major, image}) => {
       </div>
       <div className="profInfo">
         <h6>{age} | {major}</h6>
+        <h6>{id}</h6>
       </div>
     </div>
   )

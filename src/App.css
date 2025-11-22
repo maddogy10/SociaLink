@@ -98,7 +98,6 @@
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  display: none;
 }
 #frontText {
   width: 40%;
@@ -225,6 +224,13 @@
   justify-content: center;
 }
 #profileTiles div {}
+#EditProfilePage {
+  width: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
 #profilePage {
   display: flex;
   flex-direction: column;
@@ -251,4 +257,73 @@
 }
 NavLink {
   color: #030453;
+}
+#profilePic {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
+}
+#userFirstAndLast {
+  margin-top: 10px;
+}
+#EditProfileLeft {
+ 
+}
+#EditProfileRight {
+
+}
+
+#createProfilePage {
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+#createProfilePage input {
+  margin: 10px 0;
+}
+
+#submitProfile {
+  width: 50%;
+  margin: 20px auto;
+  background-color: #0077B6;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  padding: 10px;
+  font-weight: 600;
+}
+#DropDownbox {
+  position: relative;
+  width: 100%;
+}
+ul {
+  list-style: none;
+  padding: unset;
+  margin: unset;
+}
+#DropDownBlock {
+  position: absolute;
+}
+
+li {
+  padding: 14px;
+  transition: all linear 0.3s;
+}
+
+li:hover {
+  background: gray;
+  cursor: pointer;
+  color: #fff;
+}
+.dropdown-menu {
+  position: absolute;
+  background: #fff;
+  box-shadow: 0px 10px 30px 0px rgba(82, 63, 105, 0.05);
+  transition: all linear 0.3s;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
 }
