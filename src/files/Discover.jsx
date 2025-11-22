@@ -8,7 +8,7 @@ const Discover = () => {
   useEffect(() => {
   const fetchProfiles = async() => {
     try {
-      const res = await fetch('https://disc-assignment-5-users-api-iyct.onrender.com/api/users/');
+      const res = await fetch('http://localhost:5432/users');
       const data = await res.json();
       setProfiles(data);
     } catch (e) {
@@ -29,8 +29,7 @@ const Discover = () => {
       <div id="profileTiles">
       {profiles.map((profile) => (
       <div className="profBlock" key={profile.id}>
-       
-        <ProfileCard name={profile.firstName} age={profile.graduationYear} major={profile.major} image={profile.profilePicture} id={profile.id}/>
+        <ProfileCard name={profile.first_name + " " + profile.last_name} age={profile.grad_year} major={profile.major} image={profile.img_url} id={profile.id}/>
         </div>
        ))};
        </div>
@@ -41,7 +40,6 @@ const Discover = () => {
       <ProfileCard name={"Maddy"} age={18} major={"Computer Science"} image={"https://media.licdn.com/dms/image/v2/D4E03AQFtxorU5afzzg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1730741279966?e=1762992000&v=beta&t=SQVGzTxsL5_kNXnUCDKt1ZPdnJubP9rOrqvIvl091yI"}/>
       <ProfileCard name={"Maddy"} age={18} major={"Computer Science"} image={"https://media.licdn.com/dms/image/v2/D4E03AQFtxorU5afzzg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1730741279966?e=1762992000&v=beta&t=SQVGzTxsL5_kNXnUCDKt1ZPdnJubP9rOrqvIvl091yI"}/>*/}
       </div>
-      <Footer/>
       </>
   )
 }
