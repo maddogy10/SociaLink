@@ -238,8 +238,8 @@
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
-
   justify-content: center;
+  padding-bottom: 200px;
 }
 #profileTiles div {}
 #EditProfilePage {
