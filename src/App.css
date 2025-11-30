@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 #root {
   margin: 0 auto;
   text-align: center;
-}
 
+}
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -72,6 +74,7 @@
   justify-content: space-evenly;
   margin: 0 30px;
   font-size: 8px;
+  color: #03045E;
 }
 .navImg {
   width: 50px;
@@ -98,6 +101,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  align-items: center;
 }
 #frontText {
   width: 40%;
@@ -105,22 +109,30 @@
 }
 #frontText h1 {
   font-weight: 600;
-  font-size: 24px;
+  font-size: 40px;
+}
+#frontText p {
+  font-size: 12px;
+  margin: 20px 0;
+  color: rgba(3, 4, 94, 80%);
 }
 #frontButtons img {
   filter: brightness(0) invert(1);
   width: 8px;
 }
 #frontButtons button {
-  font-size: 8px;
-  border-radius: 15px;
-  padding: 7px 12px;
+  font-size: 15px;
+  border-radius: 23px;
+  padding: 10px 17px;
+  margin: 0 10px;
 }
+
 #getStarted {
     color: white;
   background-color: #0077B6;
   border: none;
     font-weight: 600;
+
 }
 #contactMe {
   background-color: white;
@@ -198,6 +210,12 @@
   padding: 20px 10px;
    border-radius: 10px;
 }
+.profBlock:hover {
+  cursor: pointer;
+  background-color: #0077B6;
+  color: white;
+  transition: background-color 0.3s, color 0.3s;
+}
 .profImg img {
   width: 95%;
   margin: 2.5%;
@@ -245,6 +263,7 @@
 #searchBar input {
   border: none;
   color: #0077B6;
+  outline: none;
 }
 #searchBar input::placeholder {
   color: #0077B6;
@@ -259,8 +278,8 @@ NavLink {
   color: #030453;
 }
 #profilePic {
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
   object-fit: cover;
   object-position: center;
   border-radius: 50%;
@@ -295,9 +314,13 @@ NavLink {
   padding: 10px;
   font-weight: 600;
 }
-#DropDownbox {
+#dropdownbox {
   position: relative;
   width: 100%;
+  margin: 0;
+}
+#dropdownbox div {
+  margin: 0;
 }
 ul {
   list-style: none;
@@ -306,6 +329,8 @@ ul {
 }
 #DropDownBlock {
   position: absolute;
+  left: -15px;
+  background-color: #fff;
 }
 
 li {
@@ -326,4 +351,198 @@ li:hover {
   top: 100%;
   left: 0;
   z-index: 1000;
+}
+
+#aboutIntro {
+  background-image: url('../src/assets/northwesternaeriallview.png');
+  width: 100%;
+  height: 40%;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 24px;
+  font-weight: 600; 
+}
+#aboutmission {
+  width: 100%;
+  height: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#aboutmission p {
+  font-size: 18px;
+  color: #03045E;
+  text-align: center;
+  margin: 0 50px;
+  font-weight: 600;
+}
+
+.featureCard {
+  width: 25%;
+  padding: 100px 20px;
+  margin: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 10px 30px 0px rgba(82, 63, 105, 0.05);
+  text-align: left;
+}
+#featureCards {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+#FeaturesSection h1 {
+  color: #03045E;
+  font-weight: 600;
+}
+
+
+#socialConnectionImg {
+  width: 200px;
+  height: auto;
+  margin: 20px 30px;
+  border-radius: 15px;
+}
+#unique {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 10px;
+}
+#whyDifferent {
+  text-align: left;
+}
+#whyDifferent li {
+  padding: 0;
+  transition: none;
+  list-style: none;
+  margin: 0;
+  font-weight: 500;
+}
+#whyDifferent li:hover {
+  background: none;
+  cursor: default;
+  color: inherit;
+}
+ol {
+  padding: 0;
+}
+
+#loginPage {
+  width: 60%;
+  margin: 50px auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+}
+#SignUpPage {
+  width: 60%;
+  margin: 50px auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+}
+.loginImageDiv {
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Northwestern_University_Aerial.jpg/500px-Northwestern_University_Aerial.jpg');
+  object-fit: cover;
+  object-position: center;
+  background-size: cover;
+  width: 100%;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 24px;
+  text-shadow: #030453 2px 2px 3px;
+}
+.loginImageTextDiv {
+  background-color: rgba(40, 50, 80, 0.75);;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  padding: 20px 40px;
+  mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%);
+}
+#SignUpPage input {
+  margin: 20px 0;
+  border: none;
+  border-radius: 15px;
+  padding: 10px;
+  
+}
+#loginPage input {
+  margin: 20px 0;
+  border: none;
+  border-radius: 15px;
+  padding: 10px;
+}
+#SignUpPage button {
+  width: 100%;
+  margin: 20px auto;
+  background-color: #0077B6;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px;
+  font-weight: 600;
+}
+#loginPage button {
+  width: 100%;
+  margin: 20px auto;
+  background-color: #0077B6;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  #mainBody {
+    flex-direction: column;
+    align-items: center;
+  }
+  #frontText {
+    width: 80%;
+    text-align: center;
+    margin-top: 20px;
+  }
+  #featureCards {
+    flex-direction: column;
+    align-items: center;
+  }
+  .featureCard {
+    width: 80%;
+    margin: 10px 0;
+  }
+  #unique {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (min-width: 1200px) {
+  .featureCard {
+    width: 20%;
+  }
+  
+}
+
+#biography {
+  font-size: 18px;
+  margin: 10px;
+  min-height: 250px;
+}
+
+#ViewProfileLeft {
+  margin: 40px 0;
+}
+#ViewProfileRight {
+  margin: 40px 0;
 }

@@ -16,16 +16,21 @@ const AuthProvider = ({ children }) => {
       img_url: '',
       date_of_birth: '',
       bio: '',
-
+      instagram: '',
+      snapchat: '',
     });
   const [isLoggedIn, setIsLoggedIn] = useState(null)
   const navigate = useNavigate();
   const [token, setToken] = useState("");
   const [avatarUrl, setAvatarUrl] = useState("");
+  const [media, setMedia] = useState([]);
+  const [savedProfiles, setSavedProfiles] = useState([]);
+  const [saved, setSaved] = useState(false);
+  const [savedProfilePages, setSavedProfilePages] = useState([]);
   useEffect(() => {
     const checkSession = async () => {
       try {
-        const res = await fetch('http://localhost:5432/users/me', {
+        const res = await fetch('https://users-api-m07a.onrender.com/users/me', {
           method: 'GET',
           credentials: 'include', // include cookies for session
         });
@@ -64,11 +69,12 @@ const AuthProvider = ({ children }) => {
   }, [])*/
   const getUserProfile = async() => {
       try {
-        const response = await fetch(`http://localhost:5432/users/${user.id}`, {
+        const response = await fetch(`https://users-api-m07a.onrender.com/users/${user.id}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
-          }
+          },
+          credentials: 'include' // include cookies for session
         });
         const data = await response.json();
         console.log("Fetched user profile data:", data);
@@ -79,7 +85,7 @@ const AuthProvider = ({ children }) => {
       }
     }
   const login = async ({email, password}) => {
-     const response = await fetch('http://localhost:5432/login', {
+     const response = await fetch('https://users-api-m07a.onrender.com/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -108,7 +114,7 @@ const AuthProvider = ({ children }) => {
     // fetch /signup to backend 
     // should return user info
     // setUser(userData), userData from response
-     const response = await fetch('http://localhost:5432/signup', {
+     const response = await fetch('https://users-api-m07a.onrender.com/signup', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -123,19 +129,17 @@ const AuthProvider = ({ children }) => {
         } else {
             console.error("Sign up successful! Please log in.");
         }
-    setUser(data.user)
-    console.log(user);
-    setIsLoggedIn(true)
+    setIsLoggedIn(false);
    // await getUserProfile();
    navigate("/login")
-    return data.user;
   }
 
   const logout = async() => {
-    await fetch('http://localhost:5432/logout', {
+    await fetch('https://users-api-m07a.onrender.com/logout', {
       method: 'POST',
       credentials: 'include', // include cookies for session
     });
+    
     setUser(null)
     setToken(null)
     setIsLoggedIn(false)
@@ -147,11 +151,12 @@ const AuthProvider = ({ children }) => {
       console.error('User id not available for update');
       return;
     }
-    const res = await fetch(`http://localhost:5432/users/${user.id}`, {
+    const res = await fetch(`https://users-api-m07a.onrender.com/users/${user.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
         }, 
+        credentials: 'include',
         body: JSON.stringify(updatedProfile),
       });
        const profData = await res.json();
@@ -160,6 +165,72 @@ const AuthProvider = ({ children }) => {
    // localStorage.setItem('user', JSON.stringify(profData));
     navigate("/profile");
     //return profData.user;
+  }
+
+  const getUserAvatar = async () => {
+    const res = await fetch(`https://users-api-m07a.onrender.com/users/${user.id}/avatar`, {
+      method: 'GET',
+      credentials: 'include',
+    });
+    if (res.ok) {
+      const data = await res.json();
+      console.log("Fetched user avatar data:", data);
+      setMedia(data);
+    } else {
+      console.error('Failed to fetch avatar');
+    }
+  }
+  const savePost = async (postId) => {
+    // Function to save a post for the user
+    const res = await fetch(`https://users-api-m07a.onrender.com/user/updatesavedposts/${user.id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify({ postId }),
+      
+    });
+    if (res.ok) {
+      const data = await res.json();
+      setSavedProfiles(data);
+     // console.log("Post saved successfully:", data);
+    } else {
+      console.error('Failed to save post');
+    } 
+    
+  }
+  const removeSavedPost = async (postId) => {
+    // Function to remove a saved post for the user
+    const res = await fetch(`https://users-api-m07a.onrender.com/user/removesavedposts/${user.id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify({ postId }),
+      
+    });
+    if (res.ok) {
+      const data = await res.json();
+      setSavedProfiles(data);
+     // console.log("Post removed successfully:", data);
+    } else {
+      console.error('Failed to remove saved post');
+    } 
+  }
+  const getUsersSavedProfiles = async() => {
+    const res = await fetch(`https://users-api-m07a.onrender.com/user/savedprofiles/${user.id}`, {
+      method: 'GET',
+      credentials: 'include',
+    });
+    if (res.ok) {
+      const data = await res.json();
+      setSavedProfiles(data);
+      console.log("Fetched user's saved profiles:", data);
+    } else {
+      console.error('Failed to fetch saved profiles');
+    }
   }
   // 
 
@@ -176,7 +247,7 @@ const AuthProvider = ({ children }) => {
     }
   }*/
   return (
-    <AuthContext.Provider value={{ user, isLoggedIn, login, logout, signUp, updateUser, profile, setProfile, getUserProfile, token, setToken, avatarUrl, setAvatarUrl }}>
+    <AuthContext.Provider value={{ user, isLoggedIn, login, logout, signUp, updateUser, profile, setProfile, getUserProfile, token, setToken, avatarUrl, setAvatarUrl, getUserAvatar, media, setMedia, savedProfiles, setSavedProfiles, savePost, removeSavedPost, saved, setSaved, getUsersSavedProfiles, savedProfilePages, setSavedProfilePages }}>
       {children}
     </AuthContext.Provider>
   )

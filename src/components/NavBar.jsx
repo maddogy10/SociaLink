@@ -48,15 +48,17 @@ function displayProfiles() {
             <NavLink to="/about" style={{color: "#03045E"}}><h2>About</h2></NavLink>
         </div>
         <div className="profile">
-            <NavLink to={isLoggedIn ? "/profile" : "/login"} style={{color: "#03045E"}}><h2>{isLoggedIn ? 
-            <div id="dropdownbox" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-            <div>Profile </div>
+            {isLoggedIn ? 
+            <h2 id="dropdownbox" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+            <NavLink to={isLoggedIn ? "/profile" : "/login"} style={{color: "#03045E"}}>
+            <div>Profile</div>
+            </NavLink>
             <div id="DropDownBlock" >
                 {isDropDownVisible && <DropDownMenu/>}
             </div>
-            </div>
+            </h2>
             : 
-            "Log In"}</h2></NavLink>
+            <NavLink to="/login" style={{color: "#03045E"}}><h2>Log In</h2></NavLink>}
         </div>
         </div>
     </div>
