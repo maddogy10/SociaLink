@@ -62,7 +62,7 @@ const ProfileCard = ({name, age, major, image, id}) => {
     <div onClick={() => navigate(`/profile/${id}`)}>
       
       <div className="profImg" >
-        <img src={image} alt="profile icon"/>
+        <img src={image? image : 'https://ypxjrbesbjcwphekeaky.supabase.co/storage/v1/object/public/useravatars/avatars/user.png'} alt="profile icon"/>
       </div>
       <div className="profName">
         <h5>{name}</h5>
