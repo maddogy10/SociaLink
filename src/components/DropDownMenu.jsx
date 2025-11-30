@@ -11,10 +11,15 @@ const DropDownMenu = () => {
        logout();
         navigate('/');
     }
+    const handleviewSavedProfiles = () => {
+        navigate('/savedprofiles');
+    }
+    
   return (
     <div id="dropdown-menu">
         <ul>
-            <li onClick={handleLogout}>logout</li>
+            <li onClick={handleviewSavedProfiles}>Saved Profiles</li>
+            <li onClick={handleLogout}>Logout</li>
         </ul>
     </div>
   )

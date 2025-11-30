@@ -14,6 +14,8 @@ import CreateProfile from './CreateProfile'
 import SignUp from './SignUp'
 import Login from './Login'
 import AuthProvider from './AuthProvider'
+import ViewProfile from './ViewProfile'
+import SavedProfilesPage from './SavedProfilesPage'
 function App() {
   //const [count, setCount] = useState(0)
 
@@ -32,6 +34,8 @@ function App() {
           <Route path="/createprofile" element={<CreateProfile/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/signup" element={<SignUp/>}/>
+          <Route path="/profile/:id" element={<ViewProfile/>}/>
+          <Route path="/savedprofiles" element={<SavedProfilesPage/>}/>
         </Routes>
         <Footer/>
       </AuthProvider>

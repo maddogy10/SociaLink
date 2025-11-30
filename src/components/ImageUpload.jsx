@@ -25,7 +25,7 @@ const ImageUpload = () => {
         formData.append('image', image);
         
         try {
-            const response = await fetch(`http://localhost:5432/users/${user.id}/uploadavatar`, {
+            const response = await fetch(`https://users-api-m07a.onrender.com/users/${user.id}/uploadavatar`, {
                 method: 'POST',
                 body: formData,
                 credentials: 'include',
