@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { AuthContext } from './AuthContext'
-//import { supabase } from '../supabaseClient';
 import { useNavigate } from 'react-router-dom';
-//import { useEffect } from 'react';
 
 
 const AuthProvider = ({ children }) => {
+  // tracks user login status and info
   const [user, setUser] = useState(null)
+  // profile state to hold user profile info
   const [profile, setProfile] = useState({
       first_name: '',
       last_name: '',
@@ -19,15 +19,26 @@ const AuthProvider = ({ children }) => {
       instagram: '',
       snapchat: '',
     });
+    // isLoggedIn state
   const [isLoggedIn, setIsLoggedIn] = useState(null)
+  // navigation
   const navigate = useNavigate();
+  // token state
   const [token, setToken] = useState("");
+  // avatar url state
   const [avatarUrl, setAvatarUrl] = useState("");
+  // media state
   const [media, setMedia] = useState([]);
+  // saved profiles state
   const [savedProfiles, setSavedProfiles] = useState([]);
+  // saved state
   const [saved, setSaved] = useState(false);
+  // saved profile pages state
   const [savedProfilePages, setSavedProfilePages] = useState([]);
+  // loading state
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
+    // On component load, check for existing session
     const checkSession = async () => {
       try {
         const res = await fetch('https://users-api-m07a.onrender.com/users/me', {
@@ -37,36 +48,23 @@ const AuthProvider = ({ children }) => {
         if (!res.ok) {
           throw new Error('No active session');
         }
+        // If session exists, set user and isLoggedIn
         const userData = await res.json();
         setUser(userData);
         setIsLoggedIn(true);
         console.log('Session restored, user:', userData);
       } catch (err) {
+        // If no session, ensure user is null and isLoggedIn is false
         setUser(null);
         setIsLoggedIn(false);
         console.log('No active session, error:', err.message);
-      }};
+      } finally {
+        setLoading(false);
+      }
+    };
     checkSession();
   }, []);
-  /*useEffect(() => {
-   // const hashParams = new URLSearchParams(window.location.hash.substring(1));
-   // const accessToken = hashParams.get("access_token");
-
-    const { data: listener } = supabase.auth.onAuthStateChange((event, session) => {
-      if (session?.user) {
-        setUser(session.user);
-        setIsLoggedIn(true);
-        setToken(session.access_token);
-      } else {
-        setUser(null);
-        setIsLoggedIn(false);
-        setToken("");
-      }
-    });
-    return () => {
-      listener.unsubscribe();
-    }
-  }, [])*/
+  // function to get user profile
   const getUserProfile = async() => {
       try {
         const response = await fetch(`https://users-api-m07a.onrender.com/users/${user.id}`, {
@@ -76,6 +74,7 @@ const AuthProvider = ({ children }) => {
           },
           credentials: 'include' // include cookies for session
         });
+        // sets profile state with user information
         const data = await response.json();
         console.log("Fetched user profile data:", data);
         setProfile(data);
@@ -84,6 +83,7 @@ const AuthProvider = ({ children }) => {
         console.error("error fetching user profile", e);
       }
     }
+    // login function
   const login = async ({email, password}) => {
      const response = await fetch('https://users-api-m07a.onrender.com/login', {
         method: 'POST',
@@ -96,6 +96,9 @@ const AuthProvider = ({ children }) => {
         const data = await response.json();
         if (data.error) {
             console.error("Login failed: " + data.error);
+            setUser(null);
+            setIsLoggedIn(false);
+            return null;
         } else {
             console.log("Login successful! Welcome back " + data.first_name + "!");
         }
@@ -109,7 +112,7 @@ const AuthProvider = ({ children }) => {
     localStorage.setItem('user', JSON.stringify(data))
     return data.user;
   }
-
+  // sign up function
   const signUp = async ({email, password, first_name, last_name}) => {
     // fetch /signup to backend 
     // should return user info
@@ -126,14 +129,15 @@ const AuthProvider = ({ children }) => {
         
         if (data.error) {
             console.error("Sign up failed: " + data.error);
+            alert("Sign up failed: " + data.error + ". Try again");
         } else {
             console.error("Sign up successful! Please log in.");
         }
     setIsLoggedIn(false);
-   // await getUserProfile();
-   navigate("/login")
+    // after sign up, redirect to login page
+    navigate("/login");
   }
-
+  // logout function
   const logout = async() => {
     await fetch('https://users-api-m07a.onrender.com/logout', {
       method: 'POST',
@@ -145,7 +149,7 @@ const AuthProvider = ({ children }) => {
     setIsLoggedIn(false)
   }
 
-  // TODO: update(?) 
+  // update user profile function 
   const updateUser = async (updatedProfile) => {
     if (!user || !user.id) {
       console.error('User id not available for update');
@@ -159,19 +163,18 @@ const AuthProvider = ({ children }) => {
         credentials: 'include',
         body: JSON.stringify(updatedProfile),
       });
+      // After updating, fetch the updated user data
        const profData = await res.json();
        console.log("Updated user profile data:", profData);
-    //setUser(profData.user);
-   // localStorage.setItem('user', JSON.stringify(profData));
     navigate("/profile");
-    //return profData.user;
   }
-
+  // function to get user avatar
   const getUserAvatar = async () => {
     const res = await fetch(`https://users-api-m07a.onrender.com/users/${user.id}/avatar`, {
       method: 'GET',
       credentials: 'include',
     });
+    // sets media state with user avatar information
     if (res.ok) {
       const data = await res.json();
       console.log("Fetched user avatar data:", data);
@@ -180,6 +183,7 @@ const AuthProvider = ({ children }) => {
       console.error('Failed to fetch avatar');
     }
   }
+  // function to save a post
   const savePost = async (postId) => {
     // Function to save a post for the user
     const res = await fetch(`https://users-api-m07a.onrender.com/user/updatesavedposts/${user.id}`, {
@@ -191,17 +195,16 @@ const AuthProvider = ({ children }) => {
       body: JSON.stringify({ postId }),
       
     });
+    // add the saved post to savedProfiles state
     if (res.ok) {
       const data = await res.json();
       setSavedProfiles(data);
-     // console.log("Post saved successfully:", data);
     } else {
       console.error('Failed to save post');
     } 
-    
   }
+  // function to remove a saved post
   const removeSavedPost = async (postId) => {
-    // Function to remove a saved post for the user
     const res = await fetch(`https://users-api-m07a.onrender.com/user/removesavedposts/${user.id}`, {
       method: 'POST',
       headers: {
@@ -211,19 +214,21 @@ const AuthProvider = ({ children }) => {
       body: JSON.stringify({ postId }),
       
     });
+    // remove the saved post from savedProfiles state
     if (res.ok) {
       const data = await res.json();
       setSavedProfiles(data);
-     // console.log("Post removed successfully:", data);
     } else {
       console.error('Failed to remove saved post');
     } 
   }
+  // function to get user's saved profiles
   const getUsersSavedProfiles = async() => {
     const res = await fetch(`https://users-api-m07a.onrender.com/user/savedprofiles/${user.id}`, {
       method: 'GET',
       credentials: 'include',
     });
+    // sets savedProfiles state with user's saved profiles (array of profile ids)
     if (res.ok) {
       const data = await res.json();
       setSavedProfiles(data);
@@ -232,23 +237,10 @@ const AuthProvider = ({ children }) => {
       console.error('Failed to fetch saved profiles');
     }
   }
-  // 
-
-  /*const getUserAvatar = async() => {
-    const res = await fetch(`http://localhost:5432/users/${user.id}/uploadavatar`, {
-      credentials: 'include',
-    });
-    if (res.ok) {
-    const data = await res.json();
-    setAvatarUrl(data.img_url);
-    return data.img_url;
-    } else {
-      console.error('Failed to fetch avatar');
-    }
-  }*/
+  // return the provider with all states and functions
   return (
     <AuthContext.Provider value={{ user, isLoggedIn, login, logout, signUp, updateUser, profile, setProfile, getUserProfile, token, setToken, avatarUrl, setAvatarUrl, getUserAvatar, media, setMedia, savedProfiles, setSavedProfiles, savePost, removeSavedPost, saved, setSaved, getUsersSavedProfiles, savedProfilePages, setSavedProfilePages }}>
-      {children}
+      {loading ? <div>loading...</div> : children}
     </AuthContext.Provider>
   )
 }

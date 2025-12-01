@@ -6,11 +6,13 @@ import { useNavigate } from 'react-router-dom';
 const DropDownMenu = () => {
     const {logout} = useContext(AuthContext);
     const navigate = useNavigate();
+    // logout user
     const handleLogout = () => {
         // Implement logout functionality here
        logout();
         navigate('/');
     }
+    // navigate to saved profiles page
     const handleviewSavedProfiles = () => {
         navigate('/savedprofiles');
     }

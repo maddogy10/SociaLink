@@ -22,7 +22,7 @@ const Home = () => {
       </div>
       <div id="frontButtons">
         <button id="getStarted" onClick={() => {isLoggedIn? navigate('/discover') : navigate('/signup'); console.log("To sign up")}}>Get Started <img src="https://cdn-icons-png.flaticon.com/128/271/271226.png" alt="button that says Get Started and links to profile creation"/></button>
-        <button id="contactMe" /*onClick={() => {window.location.href = 'mailto:madeleineyoung2029@u.northwestern.edu'; console.log("hello");}}*/>Contact Me</button>
+        <button id="contactMe" onClick={() => {window.location.href = 'mailto:madeleineyoung2029@u.northwestern.edu'; console.log("hello");}}>Contact Me</button>
       </div>
     </div>
     </div>
