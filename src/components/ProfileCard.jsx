@@ -1,13 +1,13 @@
 import {useContext, useEffect, useState } from "react";
 import { AuthContext } from '../files/AuthContext';
 import { useNavigate } from "react-router-dom";
-//import { useParams } from "react-router-dom";
 const ProfileCard = ({name, age, major, image, id}) => {
  
   
   const {savePost, removeSavedPost, getUsersSavedProfiles, savedProfiles } = useContext(AuthContext);
 
   const navigate = useNavigate();
+  // on load, get saved profiles
   useEffect(() => {
     getUsersSavedProfiles();
 
@@ -15,11 +15,13 @@ const ProfileCard = ({name, age, major, image, id}) => {
   // remove duplicates (reset), and create saveProfile
   const isSavedValue = savedProfiles?.saved_profiles?.includes(id); 
   const [isSaved, setIsSaved] =  useState(isSavedValue);
-
+  // update isSaved when savedProfiles or id changes
   useEffect(() => {
+    // checks if savedProfiles and .saved_profiles exist and includes the id
     setIsSaved(savedProfiles?.saved_profiles?.includes(id));
   }, [savedProfiles, id]);
   const handleSaveProfile = async () => {
+    // if already saved, remove it
     if (isSaved) {
       await removeSavedPost(id);
       console.log("Removed saved profile with id:", id);
@@ -30,33 +32,11 @@ const ProfileCard = ({name, age, major, image, id}) => {
     await savePost(id);
     setIsSaved(true);
     }
+    // refresh saved profiles
     getUsersSavedProfiles();
 
   };
-   // const givenMajor = {major};
-   //#0077B6
-  /*const { id } = useParams();
-  const [profile, setProfile] = useState(null);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const fetchProfile = async() => {
-      setLoading(true);
-      try {
-        const res = await fetch(`https://disc-assignment-5-users-api-iyct.onrender.com/api/users/${id}`);
-        const data = await res.json();
-        setProfile(data);
-      } catch (e) {
-        console.error("error getting products", e);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchProfile();
-  }, [id])
-
-  if (loading) return <h1>We are loading!!!</h1>
-  if (!profile) return <h1>No product found with {id}</h1>*/
+ 
     return (
       <>
     <div onClick={() => navigate(`/profile/${id}`)}>

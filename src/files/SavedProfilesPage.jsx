@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import {useContext} from 'react'
 import { AuthContext } from './AuthContext'
-
 import ProfileCard from '../components/ProfileCard'
 import { Navigate } from 'react-router-dom'
 import { useState } from 'react'
@@ -10,10 +9,13 @@ const SavedProfilesPage = () => {
     const [loading, setLoading] = useState(true);
     console.log(user);
     useEffect(() => {
+      // if user doesn't exist, return
       if (!user) return;
+      // get all saved profiles
     const fetchSavedProfiles = async() => {
       try {
         setLoading(true);
+        // get list of saved profile ids
         const res = await fetch(`https://users-api-m07a.onrender.com/user/savedprofiles/${user.id}`, {
             method: 'GET',
             credentials: 'include',
@@ -23,6 +25,7 @@ const SavedProfilesPage = () => {
         setSavedProfiles(data);
         const postIds = data?.saved_profiles || [];
         if (postIds.length === 0) return;
+        // get profiles of each user in the list
         const res2 = await fetch(`https://users-api-m07a.onrender.com/users/savedprofilespages`, {
         method: 'POST',
         credentials: 'include',
@@ -33,6 +36,7 @@ const SavedProfilesPage = () => {
       });
       const data2 = await res2.json();
       console.log("Fetched saved profiles pages data:", data2);
+      // set profiles information
       setSavedProfilePages(data2);
       console.log(savedProfilePages);
       
@@ -41,13 +45,16 @@ const SavedProfilesPage = () => {
       } finally {
         setLoading(false);
       }
+      console.log(loading);
       
     }
+    // if user exists or is loaded
     if (user && user.id) {
       fetchSavedProfiles();
     }
     console.log(savedProfiles);
-    }, [user]);
+    // tracks if the saved profiles changes or user loads
+    }, [user, savedProfiles?.length]);
     if (!isLoggedIn) {
       return <Navigate to="/login"/>;
     }
@@ -56,7 +63,7 @@ const SavedProfilesPage = () => {
     <>
       <div id="profilePage">
         <div id="profileTitle">
-       <h2>Discover</h2>
+       <h2>Saved Profiles</h2>
       </div>
       <div id="profileTiles">
         

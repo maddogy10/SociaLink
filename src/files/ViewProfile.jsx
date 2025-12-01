@@ -6,9 +6,12 @@ import { AuthContext } from './AuthContext'
 import { Navigate } from 'react-router-dom'
 
 const ViewProfile = () => {
+  // view other users profile from discover/saved profile page
   const [otherProfile, setOtherProfile] = useState(null);
+  // gets id from url
   const {id} = useParams();
   const { isLoggedIn } = useContext(AuthContext);
+  // fetches other user
   useEffect(() => {
     const fetchOtherUser = async() => {
       const res = await fetch(`https://users-api-m07a.onrender.com/user/getotheruser/${id}`, {

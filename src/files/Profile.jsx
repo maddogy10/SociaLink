@@ -6,24 +6,21 @@ import { Navigate } from 'react-router-dom'
 const Profile = () => {
   const navigate = useNavigate();
   const {user, profile, getUserProfile, getUserAvatar, media, isLoggedIn} = useContext(AuthContext);
+  // if edit profile button clicked, navigate to create profile
   const handleEditProfile = () => {
     navigate('/createprofile');
   }
    useEffect(() => {
-      //console.log("Fetching user profile for user:", Object.keys(user));
+    // if user doesn't exist, return 
       if (!user || !user.id) {
         console.log("User or user.id not available yet");
         return;
       }
-      // show up too soon for user to load
       console.log(user.id);
-      //const load = async () => {
+      // if user exists, get profile and image
        getUserProfile();
       getUserAvatar();
         console.log(media);
-     // };
-    //  load();
-      
     }, [user]);
     if (!isLoggedIn) {
       return <Navigate to="/login" />;
@@ -42,7 +39,6 @@ const Profile = () => {
       <h3 id="snapchat">Snapchat: @{profile.snapchat}</h3>
       </div>
       <div id="EditProfileRight">
-      {/* change it so if it's their birthday, they can get a pop up to celebrate */}
       <h3 id="birthday">{profile.date_of_birth}</h3>
       <p id="biography">{profile.bio}</p>
       </div>

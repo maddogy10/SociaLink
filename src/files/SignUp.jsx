@@ -6,6 +6,7 @@ import { AuthContext } from './AuthContext'
 import { Navigate } from 'react-router-dom'
 const SignUp = () => {
     const { user, signUp, isLoggedIn} = useContext(AuthContext);
+    // tracks email, password, and name in signup form
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [first_name, setFirstName] = useState('');
@@ -14,6 +15,7 @@ const SignUp = () => {
     // TODO
     // create userContext via useContext to manage user state globally
     // 
+    // signs up user with supabase
     const handleSignUp = async() => {
         // signUp(first_name, last_name, email, password);
        signUp({email, password, first_name, last_name});

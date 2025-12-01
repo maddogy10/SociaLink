@@ -4,10 +4,13 @@ import { AuthContext } from './AuthContext'
 import ImageUpload from '../components/ImageUpload'
 import { Navigate } from 'react-router-dom'
 const CreateProfile = () => {
+  // get user from context
   const {user, updateUser, profile, setProfile, getUserProfile, isLoggedIn} = useContext(AuthContext);
   console.log("CreateProfile user from context:", user);
   console.log("Current profile state:", profile);
+  // function to handle form submission of profile data
     const handleSubmit = async() => {
+      // gather data from form inputs
       const updatedProfile = {
         first_name: document.getElementById("firstNameInput").value,
         last_name: document.getElementById("lastNameInput").value,
@@ -15,11 +18,12 @@ const CreateProfile = () => {
         major: document.getElementById("majorInput").value,
         grad_year: parseInt(document.getElementById("gradYearInput").value) || null,
         img_url: profile.img_url || null,
-        date_of_birth: document.getElementById("dobInput").value || null,
+        date_of_birth: document.getElementById("dobInput").value,
         bio: document.getElementById("bioInput").value,
         instagram: document.getElementById("instagramInput").value,
         snapchat: document.getElementById("snapchatInput").value,
       };
+      // update profile state
       setProfile(updatedProfile);
       console.log("Profile to be submitted:", updatedProfile);
       try {
@@ -40,7 +44,7 @@ const CreateProfile = () => {
     }
     
     useEffect(() => {
-    //console.log("Fetching user profile for user:", Object.keys(user));
+    // fetch existing profile data when user loads
     if (!user || !user.id) {
       console.log("User or user.id not available yet");
       return;

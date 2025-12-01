@@ -9,14 +9,18 @@ const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
+    // handles login function
     const handleLogIn = async() => {
        const loggedUser = await login({ email, password });
+       // if in database, log in, else alert user
        if (loggedUser) {
          console.log('loggedUser:', loggedUser);
        } else {
          console.log('login failed');
+         alert('Incorrect user or password. Try again');
        }
     }
+    // show updated user
     useEffect(() => {
       if (user) {
         console.log("user changed:", user);

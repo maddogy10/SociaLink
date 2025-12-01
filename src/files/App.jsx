@@ -17,7 +17,6 @@ import AuthProvider from './AuthProvider'
 import ViewProfile from './ViewProfile'
 import SavedProfilesPage from './SavedProfilesPage'
 function App() {
-  //const [count, setCount] = useState(0)
 
   return (
     <BrowserRouter>
