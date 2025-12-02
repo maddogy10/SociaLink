@@ -14,10 +14,13 @@ const AuthProvider = ({ children }) => {
       major: '',
       grad_year: '',
       img_url: '',
-      date_of_birth: '',
       bio: '',
       instagram: '',
       snapchat: '',
+      user_profiles: {
+        date_of_birth: '',
+        bio: '',
+      }
     });
     // isLoggedIn state
   const [isLoggedIn, setIsLoggedIn] = useState(null)
@@ -40,6 +43,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     // On component load, check for existing session
     const checkSession = async () => {
+      setLoading(true);
       try {
         const res = await fetch('https://users-api-m07a.onrender.com/users/me', {
           method: 'GET',
@@ -78,6 +82,7 @@ const AuthProvider = ({ children }) => {
         const data = await response.json();
         console.log("Fetched user profile data:", data);
         setProfile(data);
+        console.log(profile);
         return data;
       } catch (e) {
         console.error("error fetching user profile", e);
