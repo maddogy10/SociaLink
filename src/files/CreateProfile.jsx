@@ -11,6 +11,7 @@ const CreateProfile = () => {
   // function to handle form submission of profile data
     const handleSubmit = async() => {
       // gather data from form inputs
+      console.log(document.getElementById("dobInput").value);
       const updatedProfile = {
         first_name: document.getElementById("firstNameInput").value,
         last_name: document.getElementById("lastNameInput").value,
@@ -18,10 +19,13 @@ const CreateProfile = () => {
         major: document.getElementById("majorInput").value,
         grad_year: parseInt(document.getElementById("gradYearInput").value) || null,
         img_url: profile.img_url || null,
-        date_of_birth: document.getElementById("dobInput").value,
         bio: document.getElementById("bioInput").value,
         instagram: document.getElementById("instagramInput").value,
         snapchat: document.getElementById("snapchatInput").value,
+        user_profiles: {
+                  date_of_birth: document.getElementById("dobInput").value,
+                  bio: document.getElementById("bioInput").value,
+        }
       };
       // update profile state
       setProfile(updatedProfile);
@@ -30,7 +34,7 @@ const CreateProfile = () => {
 
     // update context using backend data ONLY
     updateUser(updatedProfile);
-
+        console.log(profile.user_profiles.date_of_birth);
     console.log("Updated user from backend:", updatedProfile);
   } catch (err) {
     console.error("Error updating profile:", err);
@@ -50,6 +54,7 @@ const CreateProfile = () => {
       return;
     }
     getUserProfile();
+    console.log(profile.user_profiles.date_of_birth);
   }, [user]);
   if (!isLoggedIn) {
   return <Navigate to="/login" />;
@@ -69,7 +74,7 @@ const CreateProfile = () => {
       <p>Graduation Year</p>
       <input type="text" placeholder="Graduation year" id="gradYearInput" defaultValue={profile.grad_year} required/>
       <p>Date of Birth</p>
-      <input type="date" placeholder="Date of Birth" id="dobInput" defaultValue={profile.date_of_birth} required/>
+      <input type="date" placeholder="Date of Birth" id="dobInput" defaultValue={profile.user_profiles?.date_of_birth} required/>
       <p>Instagram</p>
       <span>@<input style={{width: "91%"}} type="text" placeholder="Instagram" id="instagramInput"defaultValue={profile.instagram} required/></span>
       <p>Snapchat</p>

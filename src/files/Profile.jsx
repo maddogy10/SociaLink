@@ -39,7 +39,7 @@ const Profile = () => {
       <h3 id="snapchat">Snapchat: @{profile.snapchat}</h3>
       </div>
       <div id="EditProfileRight">
-      <h3 id="birthday">{profile.date_of_birth}</h3>
+      <h3 id="birthday">{profile.user_profiles.date_of_birth}</h3>
       <p id="biography">{profile.bio}</p>
       </div>
       <button id="editProfileButton" onClick={handleEditProfile}>Edit Profile</button>

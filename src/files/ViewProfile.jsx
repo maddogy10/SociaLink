@@ -32,7 +32,7 @@ const ViewProfile = () => {
   return (
     <div id="ViewProfilePage">
       <div id="ViewProfileLeft">
-      <img src={otherProfile.img_url || null } alt="user's profile picture" id="profilePic" />
+      <img src={otherProfile.img_url || "https://ypxjrbesbjcwphekeaky.supabase.co/storage/v1/object/public/useravatars/avatars/user.png" } alt="user's profile picture" id="profilePic" />
       <h2 id="userFirstAndLast">{otherProfile.first_name} {otherProfile.last_name}</h2>
       <h3 id="userMajor">{otherProfile.major}</h3>
       <h3 id="gradYear">{otherProfile.grad_year}</h3>
@@ -41,7 +41,7 @@ const ViewProfile = () => {
       </div>
       <div id="ViewProfileRight">
       {/* change it so if it's their birthday, they can get a pop up to celebrate */}
-      <h3 id="birthday">{otherProfile.date_of_birth}</h3>
+      <h3 id="birthday">{otherProfile.user_profiles.date_of_birth}</h3>
       <p id="biography">{otherProfile.bio}</p>
       </div>
     </div>
