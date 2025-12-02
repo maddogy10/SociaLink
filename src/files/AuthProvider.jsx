@@ -43,7 +43,6 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     // On component load, check for existing session
     const checkSession = async () => {
-      setLoading(true);
       try {
         const res = await fetch('https://users-api-m07a.onrender.com/users/me', {
           method: 'GET',
@@ -114,7 +113,6 @@ const AuthProvider = ({ children }) => {
     setUser(data.user);
     console.log('AuthProvider setUser called, new user:', data.user);
     setIsLoggedIn(true)
-    localStorage.setItem('user', JSON.stringify(data))
     return data.user;
   }
   // sign up function
